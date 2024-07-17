@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anash Password Strength Checker</title>
+  <style>
+    body {
+      background-image: url('https://i.postimg.cc/9MXypw6K/create-password-strength-checker-vue.png');
+      background-position: center;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #password-strength {
+      width: 100%;
+      height: 10px;
+      background-color: #ddd;
+      margin-top: 5px;
+    }
+    #strength-bar {
+      height: 10px;
+      width: 0;
+      background-color: red;
+    }
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <label for="password">Check Your Password:</label>
+    <input type="password" id="password" oninput="updateStrengthMeter(this.value)">
+    <div id="password-strength">
+      <div id="strength-bar"></div>
+    </div>
+    <p id="feedback"></p>
+  </div>
+
+  <script>
+    function analyzePassword(password) {
+      let lengthScore = password.length > 8 ? 1 : 0;
+      let complexityScore = /[A-Z]/.test(password) && /[a-z]/.test(password) && /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password) ? 1 : 0;
+      let uniquenessScore = /(.)\1{2,}/.test(password) ? 0 : 1;
+
+      let score = lengthScore + complexityScore + uniquenessScore;
+      return score;
+    }
+
+    function updateStrengthMeter(password) {
+      let score = analyzePassword(password);
+      let strengthBar = document.getElementById('strength-bar');
+      let feedback = document.getElementById('feedback');
+
+      if (score === 3) {
+        strengthBar.style.width = '100%';
+        strengthBar.style.backgroundColor = 'green';
+        feedback.innerText = 'Strong Password(Hulk)';
+      } else if (score === 2) {
+        strengthBar.style.width = '66%';
+        strengthBar.style.backgroundColor = 'yellow';
+        feedback.innerText = 'Medium Strength Password(Rocket)';
+      } else {
+        strengthBar.style.width = '33%';
+        strengthBar.style.backgroundColor = 'red';
+        feedback.innerText = 'Weak Password(Groot)';
+      }
+    }
+  </script>
+</body>
+</html>
