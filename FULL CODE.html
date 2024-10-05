@@ -13,23 +13,52 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    label {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+    input[type="password"] {
+      width: 100%;
+      height: 40px;
+      padding: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="password"]:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
     #password-strength {
       width: 100%;
       height: 10px;
       background-color: #ddd;
-      margin-top: 5px;
+      margin-top: 10px;
+      border-radius: 10px;
+      overflow: hidden;
     }
     #strength-bar {
       height: 10px;
       width: 0;
       background-color: red;
+      transition: width 0.5s ease;
     }
-    .container {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
+    #feedback {
+      font-size: 16px;
+      font-weight: bold;
+      color: #666;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -62,14 +91,17 @@
         strengthBar.style.width = '100%';
         strengthBar.style.backgroundColor = 'green';
         feedback.innerText = 'Strong Password(Hulk)';
+        feedback.style.color = 'green';
       } else if (score === 2) {
         strengthBar.style.width = '66%';
         strengthBar.style.backgroundColor = 'yellow';
         feedback.innerText = 'Medium Strength Password(Rocket)';
+        feedback.style.color = 'Blue';
       } else {
         strengthBar.style.width = '33%';
         strengthBar.style.backgroundColor = 'red';
         feedback.innerText = 'Weak Password(Groot)';
+        feedback.style.color = 'red';
       }
     }
   </script>
